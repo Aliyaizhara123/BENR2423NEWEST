@@ -13,7 +13,7 @@ app.listen(port, () => {
 })
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion,ObjectId } = require('mongodb');
 const uri = "mongodb+srv://Aliyaizhara123:Aliyaizhara123@cluster0.02sbm3w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -30,11 +30,21 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    
+    let result = await client.db('Databases').collection('Mingyu').deleteOne(  //change here delete,update,create,find
+    { _id: new ObjectId('66051562884fb40b8379b741')},
+    )
+    //{ $set: { 
+     // name: 'Aya',
+      //age: 3,
+
+    // } }
+    //)
+     console.log(result)
+    
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+   
   }
 }
 run().catch(console.dir);
